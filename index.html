@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <title>Hong Kong Taxes</title>
+  </head>
+  <body>
+   <div class="row justify-content-md-center">
+    <div class="col-10">
+   
+	<div class="jumbotron">
+	  <h1 class="display-6">Hong Kong Taxes</h1>
+	  <p class="lead">Individual - Sample personal income tax calculation (2018/2019)</p>
+	  <hr class="my-4">
+	  <div class="row">
+	    <div class="col-6">
+			<h4>Salaries (Self)</h4>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Salaries HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right" id="S1"  value="0" onkeyup="incomeCalc(this);">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Bonus HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="S2" value="0" onkeyup="incomeCalc(this);">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group input-group-lg">
+			  <div class="input-group-prepend">
+				<span class="input-group-text  text-success">Total assessable income HKD</span>
+			  </div>
+			  <input type="text" disabled="disabled" class="form-control text-success text-right" id="Income" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text  text-success">.00</span>
+			  </div>
+			</div>
+		</div>
+	    <div class="col-6">
+			<h4>Salaries (Spouse)</h4>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Salaries HKD</span>
+				</div>
+				<input type="text" class="form-control text-right" id="S1_2"  value="0" onkeyup="incomeCalc(this);">
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Bonus HKD</span>
+				</div>
+				<input type="text" class="form-control text-right"  id="S2_2" value="0" onkeyup="incomeCalc(this);">
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
+			</div>
+			<div class="input-group input-group-lg">
+				<div class="input-group-prepend">
+					<span class="input-group-text  text-success">Total assessable income HKD</span>
+				</div>
+				<input type="text" disabled="disabled" class="form-control text-success text-right" id="Income_2" value="0">
+				<div class="input-group-append">
+					<span class="input-group-text  text-success">.00</span>
+				</div>
+			</div>
+		</div>
+	    <div class="col-6">
+		  <h4>Allowances (Self)</h4>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Allowances</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="#" onclick="$('#A1').val('132000'); return allowancesCalc();">Basic Allowance</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A1').val('264000'); return allowancesCalc();">Married Person’s Allowance</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right" id="A1" disabled="disabled" value="0" onchange="">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Child Allowance (For each of the 1st to 9th child)</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(0); return allowancesCalc();">-</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000); return allowancesCalc();">1</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*2); return allowancesCalc();">2</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*3); return allowancesCalc();">3</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*4); return allowancesCalc();">4</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*5); return allowancesCalc();">5</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*6); return allowancesCalc();">6</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*7); return allowancesCalc();">7</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*8); return allowancesCalc();">8</a>
+				  <a class="dropdown-item" href="#" onclick="$('#A2').val(120000*9); return allowancesCalc();">9</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="A2" disabled="disabled"  value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Childrens born during the year</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#" onclick="$('#A3').val(0); return allowancesCalc();">-</a>
+					<a class="dropdown-item" href="#" onclick="$('#A3').val(120000); return allowancesCalc();">1</a>
+					<a class="dropdown-item" href="#" onclick="$('#A3').val(120000*2); return allowancesCalc();">2</a>
+					<a class="dropdown-item" href="#" onclick="$('#A3').val(120000*3); return allowancesCalc();">3</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right" id="A3" disabled="disabled" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Brother or Sister (For each)</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#" onclick="$('#A4').val(0); return allowancesCalc();">-</a>
+					<a class="dropdown-item" href="#" onclick="$('#A4').val(37500); return allowancesCalc();">1</a>
+					<a class="dropdown-item" href="#" onclick="$('#A4').val(37500*2); return allowancesCalc();">2</a>
+					<a class="dropdown-item" href="#" onclick="$('#A4').val(37500*3); return allowancesCalc();">3</a>
+					<a class="dropdown-item" href="#" onclick="$('#A4').val(37500*4); return allowancesCalc();">4</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right" id="A4" disabled="disabled" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Parent and Grandparent (For each 60+)</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#" onclick="$('#A5').val(0); return allowancesCalc();">-</a>
+					<a class="dropdown-item" href="#" onclick="$('#A5').val(50000); return allowancesCalc();">1</a>
+					<a class="dropdown-item" href="#" onclick="$('#A5').val(50000*2); return allowancesCalc();">2</a>
+					<a class="dropdown-item" href="#" onclick="$('#A5').val(50000*3); return allowancesCalc();">3</a>
+					<a class="dropdown-item" href="#" onclick="$('#A5').val(50000*4); return allowancesCalc();">4</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right" id="A5" disabled="disabled" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Parent and Grandparent (For each 55-60)</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" onclick="$('#A6').val(0); return allowancesCalc();">-</a>
+						<a class="dropdown-item" href="#" onclick="$('#A6').val(25000); return allowancesCalc();">1</a>
+						<a class="dropdown-item" href="#" onclick="$('#A6').val(25000*2); return allowancesCalc();">2</a>
+						<a class="dropdown-item" href="#" onclick="$('#A6').val(25000*3); return allowancesCalc();">3</a>
+						<a class="dropdown-item" href="#" onclick="$('#A6').val(25000*4); return allowancesCalc();">4</a>
+					</div>
+				</div>
+				<input type="text" class="form-control text-right" id="A6" disabled="disabled" value="0">
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aditional Dependent Parent and Grandparent (For each 60+)</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#" onclick="$('#A7').val(0); return allowancesCalc();">-</a>
+					<a class="dropdown-item" href="#" onclick="$('#A7').val(50000); return allowancesCalc();">1</a>
+					<a class="dropdown-item" href="#" onclick="$('#A7').val(50000*2); return allowancesCalc();">2</a>
+					<a class="dropdown-item" href="#" onclick="$('#A7').val(50000*3); return allowancesCalc();">3</a>
+					<a class="dropdown-item" href="#" onclick="$('#A7').val(50000*4); return allowancesCalc();">4</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="A7" disabled="disabled"  value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aditional Dependent Parent and Grandparent (For each 55-60)</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" onclick="$('#A8').val(0); return allowancesCalc();">-</a>
+						<a class="dropdown-item" href="#" onclick="$('#A8').val(25000); return allowancesCalc();">1</a>
+						<a class="dropdown-item" href="#" onclick="$('#A8').val(25000*2); return allowancesCalc();">2</a>
+						<a class="dropdown-item" href="#" onclick="$('#A8').val(25000*3); return allowancesCalc();">3</a>
+						<a class="dropdown-item" href="#" onclick="$('#A8').val(25000*4); return allowancesCalc();">4</a>
+					</div>
+				</div>
+				<input type="text" class="form-control text-right" id="A8" disabled="disabled"  value="0">
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Single Parent Allowance </span>
+				<span class="input-group-text"><input type="checkbox" aria-label="Checkbox for following text input" onchange="if (this.checked) $('#A9').val(132000); else $('#A9').val(0); allowancesCalc()"></span>
+			  </div>
+              <input type="text" class="form-control text-right" id="A9" disabled="disabled" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Personal Disability Allowance</span>
+				  <span class="input-group-text"><input type="checkbox" aria-label="Checkbox for following text input" onchange="if (this.checked) $('#A10').val(75000); else $('#A10').val(0); allowancesCalc()"></span>
+			  </div>
+              <input type="text" class="form-control text-right"  id="A10" disabled="disabled" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Disabled Dependant Allowance (For each)</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#" onclick="$('#A11').val(0); return allowancesCalc();">-</a>
+					<a class="dropdown-item" href="#" onclick="$('#A11').val(75000); return allowancesCalc();">1</a>
+					<a class="dropdown-item" href="#" onclick="$('#A11').val(75000*2); return allowancesCalc();">2</a>
+					<a class="dropdown-item" href="#" onclick="$('#A11').val(75000*3); return allowancesCalc();">3</a>
+					<a class="dropdown-item" href="#" onclick="$('#A11').val(75000*4); return allowancesCalc();">4</a>
+				</div>
+			  </div>
+			  <input type="text" class="form-control text-right" id="A11" disabled="disabled"  value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group input-group-lg">
+			  <div class="input-group-prepend">
+				<span class="input-group-text  text-info">Total allowances HKD</span>
+			  </div>
+			  <input type="text" disabled="disabled" class="form-control text-info text-right"  id="Allowance" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text  text-info">.00</span>
+			  </div>
+			</div>
+			
+		</div>
+		  <div class="col-6">
+			  <h4>Allowances (Spouse)</h4>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Allowances</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A1_2').val('132000'); return allowancesCalc();">Basic Allowance</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A1_2').val('264000'); return allowancesCalc();">Married Person’s Allowance</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A1_2" disabled="disabled" value="0" onchange="">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Child Allowance (For each of the 1st to 9th child)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*4); return allowancesCalc();">4</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*5); return allowancesCalc();">5</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*6); return allowancesCalc();">6</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*7); return allowancesCalc();">7</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*8); return allowancesCalc();">8</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A2_2').val(120000*9); return allowancesCalc();">9</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="A2_2" disabled="disabled"  value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Childrens born during the year</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A3_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A3_2').val(120000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A3_2').val(120000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A3_2').val(120000*3); return allowancesCalc();">3</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A3_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Brother or Sister (For each)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A4_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A4_2').val(37500); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A4_2').val(37500*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A4_2').val(37500*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A4_2').val(37500*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A4_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Parent and Grandparent (For each 60+)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A5_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A5_2').val(50000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A5_2').val(50000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A5_2').val(50000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A5_2').val(50000*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A5_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dependent Parent and Grandparent (For each 55-60)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A6_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A6_2').val(25000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A6_2').val(25000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A6_2').val(25000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A6_2').val(25000*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A6_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aditional Dependent Parent and Grandparent (For each 60+)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A7_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A7_2').val(50000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A7_2').val(50000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A7_2').val(50000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A7_2').val(50000*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="A7_2" disabled="disabled"  value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aditional Dependent Parent and Grandparent (For each 55-60)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A8_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A8_2').val(25000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A8_2').val(25000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A8_2').val(25000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A8_2').val(25000*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A8_2" disabled="disabled"  value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Single Parent Allowance </span>
+					  <span class="input-group-text"><input type="checkbox" aria-label="Checkbox for following text input" onchange="if (this.checked) $('#A9').val(132000); else $('#A9').val(0); allowancesCalc()"></span>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A9_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Personal Disability Allowance</span>
+					  <span class="input-group-text"><input type="checkbox" aria-label="Checkbox for following text input" onchange="if (this.checked) $('#A10').val(75000); else $('#A10').val(0); allowancesCalc()"></span>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="A10_2" disabled="disabled" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Disabled Dependant Allowance (For each)</button>
+					  <div class="dropdown-menu">
+						  <a class="dropdown-item" href="#" onclick="$('#A11_2').val(0); return allowancesCalc();">-</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A11_2').val(75000); return allowancesCalc();">1</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A11_2').val(75000*2); return allowancesCalc();">2</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A11_2').val(75000*3); return allowancesCalc();">3</a>
+						  <a class="dropdown-item" href="#" onclick="$('#A11_2').val(75000*4); return allowancesCalc();">4</a>
+					  </div>
+				  </div>
+				  <input type="text" class="form-control text-right" id="A11_2" disabled="disabled"  value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group input-group-lg">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text  text-info">Total allowances HKD</span>
+				  </div>
+				  <input type="text" disabled="disabled" class="form-control text-info text-right"  id="Allowance_2" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text  text-info">.00</span>
+				  </div>
+			  </div>
+
+		  </div>
+	    <div class="col-6">
+		  <h4>Deductions (Self)</h4>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Expenses of Self-Education ( 100 000 max.) HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="D1"  onkeyup="deductionsCalc(this);" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Elderly Residential Care Expenses ( 100 000 max.) HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="D2"  onkeyup="deductionsCalc(this);"  value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Home Loan Interest ( 100 000 max.) HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right"   id="D3"  onkeyup="deductionsCalc(this);" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Charitable donations	 HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right"  id="D4"  onkeyup="deductionsCalc(this);" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+				<span class="input-group-text">Retirement scheme contributions	 HKD</span>
+			  </div>
+			  <input type="text" class="form-control text-right" disabled="disabled"  id="D5"  onkeyup="deductionsCalc(this);" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text">.00</span>
+			  </div>
+			</div>
+			<div class="input-group input-group-lg">
+			  <div class="input-group-prepend">
+				<span class="input-group-text  text-info">Total deductions HKD</span>
+			  </div>
+			  <input type="text" disabled="disabled" class="form-control text-info text-right"  id="Deductions" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text  text-info">.00</span>
+			  </div>
+			</div>
+			
+		</div>
+		  <div class="col-6">
+			  <h4>Deductions (Spouse)</h4>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Expenses of Self-Education ( 100 000 max.) HKD</span>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="D1_2"  onkeyup="deductionsCalc(this);" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Elderly Residential Care Expenses ( 100 000 max.) HKD</span>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="D2_2"  onkeyup="deductionsCalc(this);"  value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Home Loan Interest ( 100 000 max.) HKD</span>
+				  </div>
+				  <input type="text" class="form-control text-right"   id="D3_2"  onkeyup="deductionsCalc(this);" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Charitable donations	 HKD</span>
+				  </div>
+				  <input type="text" class="form-control text-right"  id="D4_2"  onkeyup="deductionsCalc(this);" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text">Retirement scheme contributions	 HKD</span>
+				  </div>
+				  <input type="text" class="form-control text-right" disabled="disabled"  id="D5_2"  onkeyup="deductionsCalc(this);" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text">.00</span>
+				  </div>
+			  </div>
+			  <div class="input-group input-group-lg">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text  text-info">Total deductions HKD</span>
+				  </div>
+				  <input type="text" disabled="disabled" class="form-control text-info text-right"  id="Deductions_2" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text  text-info">.00</span>
+				  </div>
+			  </div>
+
+		  </div>
+	  </div>
+       <hr class="my-4">
+	  <div class="row">
+	    <div class="col-6">
+			<div class="input-group input-group-lg">
+			  <div class="input-group-prepend">
+				<span class="input-group-text  text-danger">Standard Tax Income HKD</span>
+			  </div>
+			  <input type="text" disabled="disabled" class="form-control text-danger text-right" id="Standard" value="0">
+			  <div class="input-group-append">
+				<span class="input-group-text  text-danger">.00</span>
+			  </div>
+			</div>
+		</div>
+		  <div class="col-6">
+			  <div class="input-group input-group-lg">
+				  <div class="input-group-prepend">
+					  <span class="input-group-text  text-danger">Net Chargeable Income HKD</span>
+				  </div>
+				  <input type="text" disabled="disabled" class="form-control text-danger text-right" id="Chargeable" value="0">
+				  <div class="input-group-append">
+					  <span class="input-group-text  text-danger">.00</span>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+       <hr class="my-4">
+		  <div class="row">
+			<div class="col-6">
+			  <h4>Standard Rates of Tax</h4>
+				<div class="result_fee text-primary">HKD <span id="Standard_Res_Sum">0</span>.00 * <b>15%</b> = HKD <span id="Standard_Res_Tax">0</span>.00</div>
+			</div>
+			<div class="col-6">
+			  <h4>Progressive Rates of Tax</h4>
+				<span class="result_fee_sm">First 50000 </span><span class="result_fee_sm text-primary">HKD <span id="Progress_Res_Sum_1">0</span>.00 * <b>2%</b> = HKD <span id="Progress_Res_Tax_1">0</span>.00</span><br/>
+				<span class="result_fee_sm">Second 50000 </span><span class="result_fee_sm text-primary">HKD <span id="Progress_Res_Sum_2">0</span>.00 * <b>6%</b> = HKD <span id="Progress_Res_Tax_2">0</span>.00</span><br/>
+				<span class="result_fee_sm">Third 50000 </span><span class="result_fee_sm text-primary">HKD <span id="Progress_Res_Sum_3">0</span>.00 * <b>10%</b> = HKD <span id="Progress_Res_Tax_3">0</span>.00</span><br/>
+				<span class="result_fee_sm">Fourth 50000 </span><span class="result_fee_sm text-primary">HKD <span id="Progress_Res_Sum_4">0</span>.00 * <b>14%</b> = HKD <span id="Progress_Res_Tax_4">0</span>.00</span><br/>
+				<span class="result_fee_sm">Remainder </span><span class="result_fee_sm text-primary">HKD <span id="Progress_Res_Sum_5">0</span>.00 * <b>17%</b> = HKD <span id="Progress_Res_Tax_5">0</span>.00</span><br/>
+				<span class="result_fee">TOTAL </span><span class="result_fee text-primary"> HKD <span id="Progress_total">0</span>.00</span><br/>
+				<span class="result_fee">TAX REDUCTION</span><span class="result_fee text-primary"> HKD <span id="Progress_total_reduction">0</span>.00</span><br/>
+				<span class="result_fee">TAX PAYABLE BY YOU (AFTER TAX REDUCTION)</span><span class="result_fee text-primary"> HKD <span id="Progress_total_after_reduction">0</span>.00</span>
+			</div>
+		  </div>
+       <hr class="my-4">
+	</div>
+	
+	</div>
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="code.js"></script>
+  </body>
+</html>

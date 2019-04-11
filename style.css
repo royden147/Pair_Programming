@@ -1,0 +1,10 @@
+.error{
+    border: red solid 1px;
+    border-radius: 4px;
+}
+.result_fee_sm{
+    font-size: 17px;
+}
+.result_fee{
+    font-size: 24px;
+}
